@@ -1,0 +1,26 @@
+#wrapper {
+    position: fixed;
+    left: 45%;
+    margin-top: 50px;
+    margin-left: -150px;     
+}
+
+p, form, input, div {
+    text-align: center;
+    /* vertical-align: center; */
+}
+
+#box {
+    margin-left: 35%;
+    margin-bottom: 50px;
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+    
+}
+
+#message {
+    margin-top: 40%;
+    color: white;
+    font-size: 20px;
+}
