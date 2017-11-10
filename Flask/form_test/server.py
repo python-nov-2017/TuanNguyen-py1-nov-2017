@@ -1,19 +1,17 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, redirect, request, session, flash
 app = Flask(__name__)
-app.secret_key = 'ThisisSecret'
+app.secret_key = 'KeepItSecretKeepItSafe'
+
 @app.route('/')
 def index():
-  return render_template("index.html")
+  return render_template('index.html')
 
-@app.route('/users', methods=['POST'])
-def create_user():
-   print "Got Post Info"
-   session['name'] = request.form['name']
-   session['email'] = request.form['email']
-   return redirect('/show')
+@app.route('/process', methods=['Post'])
+def process():
+  if len(request.form["name"]) < 1:
+    flash("Name cannot be empty!")
+  else:
+    flash("Success! Your name is {}".format(request.form['name']))
+  return redirect('/')
 
-@app.route('/show')
-def show_user():
-    return render_template('user.html')
-
-app.run(debug=True) # run our server
+app.run(debug=True)
