@@ -1,0 +1,29 @@
+* {
+    margin: 5px;
+    padding: 5px;
+}
+#wrapper {
+    width: 400px;
+    /* height: 400px; */
+    padding: 30px 30px;
+    margin: 0 auto;
+    border: 1px solid black;    
+}
+
+span {    
+    display: inline-block;
+    width: 40%;
+}
+
+input {
+    width: 45%;
+} 
+
+.message {
+    display: block;
+    width: 100%;
+}
+
+#submit {
+    margin-left: 25%;
+}
