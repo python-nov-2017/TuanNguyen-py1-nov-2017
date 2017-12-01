@@ -1,0 +1,42 @@
+* {
+    margin: 5px;
+    padding: 5px;
+}
+#wrapper {
+    width: 40%;
+    height: 400px;
+    padding: 30px 30px;
+    margin: 0 auto;
+    /* text-align: center;  */
+}
+
+form {
+    text-align: center;
+}
+#error {
+    width: 20%;
+    padding: 5px 50px;
+    margin: 0 auto;
+    text-align: center; 
+    background-color: red;
+    border: 1px solid black;
+    color: white;
+}
+
+#success {
+    width: 50%;
+    padding: 5px 50px;
+    margin: 0 auto;
+    text-align: center; 
+    background-color: green;
+    border: 1px solid black; 
+}
+
+ul {
+    list-style-type: none;    
+}
+
+span {
+    width: 30%;
+    margin-left: 10%;
+}
