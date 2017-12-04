@@ -1,0 +1,36 @@
+
+#wrapper {
+    width: 40%;
+    height: 400px;
+    padding: 30px 30px;
+    margin: 0 auto;
+}
+
+#friends {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#friends td, #friends th {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+#friends th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:grey;
+    color: white;
+}
+
+form {
+    display: inline-block;
+}
+
+span {
+    width: 30%;
+    margin-left: 10%;
+    display: inline-block;
+}
