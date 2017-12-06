@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">      
+    <title>Login and Registration</title>
+</head>
+<body>
+    <!-- {{ all_users }}     -->
+    {% for user in all_users: %}
+    You are logged in, {{ user.first_name }} {{user.last_name }}!
+    <br>
+    Your email address is {{ user.email }}
+    {% endfor %}
+</body>
+</html>
