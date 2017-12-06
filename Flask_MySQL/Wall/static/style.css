@@ -1,0 +1,80 @@
+
+#wrapper {
+    width: 50%;
+    height: 400px;
+    padding: 5px 5px;
+    margin: 0 auto;
+    border: 1px 2px solid black; 
+    text-align: center;
+}
+
+#header, #wall {
+    text-align: left;
+    width: 100%;
+}
+#logo {
+    display: inline-block;
+    width: 70%;
+}
+#user_config {
+    display: inline-block;
+    width:25%;
+    text-align: right;
+}
+
+form {
+    /* border: 1px solid green; */
+    width: 45%;
+    text-align: center;    
+    display: inline-block;
+    vertical-align: top;
+    
+}
+
+span {
+    width: 25%;
+    margin-left: 5%;
+    display: inline-block;
+    text-align: right;
+    /* border: 1px solid blue; */
+}
+
+.posting {
+    width: 100%;
+    text-align: left;
+}
+
+.messages h2,h4,h5 {
+    margin-top: 3%;
+    margin-bottom: 0;
+}
+.posting form {
+    text-align: left;
+    width: 100%;
+}
+.posting form textarea {
+    width:100%;
+}
+
+#messages {
+    border: 1px solid black;
+    margin: 5px auto;
+}
+.messages p {
+    margin-left: 5%;
+    margin-top: 0%;
+
+}
+.messages span {
+    display: inline-block;
+    width: 20%;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 0%;
+}
+
+
+.messages div {
+    margin-left: 5%;
+    width: 95%;
+}
