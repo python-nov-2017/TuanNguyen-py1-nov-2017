@@ -6,3 +6,5 @@ item2 = Product("PC", 600, "3lbs", "HP")
 
 store = Store([item1, item2], "VA", "Minh")
 store.inventory()
+
+print store

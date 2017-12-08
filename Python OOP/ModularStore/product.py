@@ -31,6 +31,9 @@ class Product(object):
         print ""
         return self
 
+    def __repr__(self):       
+        return "Item Name: {}".format(self.name)
+
 if __name__ == "__main__":
     item = Product("PC", 600, "3lbs", "HP")
     item.DisplayInfo()
