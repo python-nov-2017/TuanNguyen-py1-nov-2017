@@ -1,0 +1,30 @@
+* {
+    margin: 5px;
+    padding: 5px;
+}
+#wrapper {
+    width: 350px;
+    height: 400px;
+    padding: 30px 30px;
+    margin: 0 auto;
+    border: 1px solid black;    
+}
+
+span {    
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+
+ input {
+    width: 45%;
+} 
+
+select {
+    width: 49%;
+}
+
+p {
+    display: inline-block;
+    width: 40%;
+}
