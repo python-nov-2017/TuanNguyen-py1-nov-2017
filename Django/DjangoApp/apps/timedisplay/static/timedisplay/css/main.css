@@ -1,0 +1,9 @@
+#wrapper{
+    margin: 0 auto;
+    width: 50%;
+
+}
+#wrapper div {
+    border: 1px solid black;
+    text-align: center;
+}
