@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'apps.blogs',
     'apps.timedisplay',
+    'apps.randomword',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^', include('apps.blogs.urls')),
-    url(r'^time$', include('apps.timedisplay.urls'))
+    url(r'^time', include('apps.timedisplay.urls')),
+    url(r'^random_word', include('apps.randomword.urls'))    
 ]

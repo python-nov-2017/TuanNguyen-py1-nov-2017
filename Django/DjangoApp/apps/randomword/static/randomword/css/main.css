@@ -1,0 +1,16 @@
+#wrapper {
+    margin: 0 auto;
+    width: 40%;
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+#random_string {
+    border: 1px solid black;
+    margin: 5px 5px;
+    width: 30%;
+    display: inline-block;
+}
