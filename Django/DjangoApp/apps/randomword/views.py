@@ -6,13 +6,10 @@ from django.utils.crypto import get_random_string
 # Create your views here.
 
 def index(request):
-    print request.session
     if 'counter' not in request.session:
         request.session['counter'] = 0
     request.session['counter']+=1
     request.session['string'] = get_random_string(length=14)
-    print request.session['counter']
-    print request.session['string']
     return render(request, "randomword/index.html")
 
 def reset(request):

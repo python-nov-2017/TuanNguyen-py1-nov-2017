@@ -9,18 +9,14 @@ def index(request):
     return render(request, 'surveys/index.html')
 
 def process(request):
-    print "not get in method"
     if request.method == "POST":
-        print "Process here"
         if 'counter' not in request.session:
             request.session['counter'] = 0
         request.session['counter']+=1
         request.session['name'] = request.POST['name']
         request.session['location'] = request.POST['location']
         request.session['language'] = request.POST['language']
-        request.session['comment'] = request.POST['comment']        
-        print request.session['counter']
-        print request.session['name']
+        request.session['comment'] = request.POST['comment']
         return redirect('/result')
     else:
         redirect('/')

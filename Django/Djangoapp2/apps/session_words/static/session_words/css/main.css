@@ -1,0 +1,23 @@
+#wrapper {
+    margin: 0 auto;
+    width: 40%;
+    /* border: 1px solid black; */
+}
+
+#add_side, #clear_side {
+    width: 48%;
+    height: 500px;
+    /* border: 1px dotted green; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+#add_side {
+    padding_right: 20px;
+    border-right: 3px solid black;
+}
+#clear_side {
+    padding-left: 20px;
+    margin-top: 30px;
+}
