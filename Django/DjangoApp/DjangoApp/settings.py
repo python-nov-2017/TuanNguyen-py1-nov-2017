@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'apps.blogs',
     'apps.timedisplay',
     'apps.randomword',
+    'apps.surveys',
+    'apps.users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
