@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'ninjagold/css/main.css' %}">
+    
+</head>
+<body>
+    <div id="wrapper">        
+            <div id="div_gold">
+                <label for="gold">Your Gold &emsp;</label>
+                <input type="text" name="gold" value= "{{ request.session.current_gold}}">
+            </div>            
+            <div class="place">
+                <form action="ninjagold/process_gold/farm" method="POST">
+                    {% csrf_token %}
+                    <h1>Farm</h1>
+                    <p>(earns 10-20 golds)</p>
+                    <input type="submit" name="farm" value="Find Gold!">     
+                </form>  
+            </div>      
+               
+            <div class="place">
+                <form action="ninjagold/process_gold/cave" method="POST">    
+                    {% csrf_token %}
+                    <h1>Cave</h1>
+                    <p>(earns 5-10 golds)</p>
+                    <input type="submit" name="cave" value="Find Gold!">            
+                </form>                
+            </div>
+            <div class="place">
+                <form action="ninjagold/process_gold/house" method="POST">                
+                    {% csrf_token %}
+                    <h1>House</h1>
+                    <p>(earns 2-5 golds)</p>
+                    <input type="submit" name="house" value="Find Gold!">            
+                </form>                            
+            </div>
+            <div class="place">
+                <form action="ninjagold/process_gold/casino" method="POST">                
+                    {% csrf_token %}
+                    <h1>Casino</h1>
+                    <p>(earns/takes 0-50 golds)</p>
+                    <input type="submit" name="casino" value="Find Gold!">            
+                </form>                 
+            </div>  
+            <label for="activity">Activity</label> <br>            
+            <div id="activities">
+                {% for i in request.session.record %}
+                    {% if i.gold >= 0 %}
+                        <p style="color:green">
+                            Earned {{ i.gold }} golds from the {{ i.place }}! {{ i.time}}                        
+                        </p> 
+                    {% else %}
+                        <p style="color:red">
+                            Entered a casino and lost {{ i.gold }} golds... Ouch.. {{ i.time}}                        
+                        </p>
+                    {% endif %}            
+                {% endfor%}
+            </div>        
+                                                        
+        <form action="ninjagold/reset" id="reset">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Play again">
+        </form>        
+    </div>
+
+</body>
+</html>

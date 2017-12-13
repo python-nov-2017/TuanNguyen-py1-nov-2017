@@ -1,0 +1,38 @@
+#wrapper {
+    margin: 0 auto;
+    width: 50%;
+    height: 700px;
+    /* border: 1px solid black; */
+}
+
+.place {
+    display: inline-block;
+    width: 20%;
+    border: 1px solid black;
+    margin: 1% 2%;
+
+}
+
+.place h1, .place p, .place input {
+    text-align: center;
+    display: block;
+    margin: 10% auto;
+}
+
+#activities {
+    margin: auto;
+    padding: 5px;
+    overflow: auto;
+    border: 1px solid black;
+    width: 95%;
+    height: 133px;
+}
+
+p {
+    margin: 0;
+}
+
+#reset {
+    margin: 10px auto;
+    text-align: center;
+}
