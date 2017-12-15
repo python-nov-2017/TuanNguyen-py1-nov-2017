@@ -1,0 +1,15 @@
+User.objects.create(first_name="Tuan", last_name="Nguyen", age=29, email_address="test@python.com")
+User.objects.create(first_name="Steven", last_name="Tran", age=28, email_address="steven@python.com")
+User.objects.create(first_name="John", last_name="Smith", age=25, email_address="john@python.com")
+User.objects.create(first_name="Quan", last_name="Truong", age=29, email_address="quan@python.com")
+
+User.objects.all()
+User.objects.last()
+User.objects.create(first_name="Nyki", last_name="Suk", age=28, email_address="nyki@python.com")
+User.objects.first()
+User.objects.order_by("first_name")
+b = User.objects.get(id=3)
+b.last_name = "Ssmith"
+b.save()
+User.objects.get(id=4).delete()
+

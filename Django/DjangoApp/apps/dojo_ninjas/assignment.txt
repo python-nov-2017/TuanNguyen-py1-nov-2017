@@ -1,0 +1,34 @@
+Dojo.objects.create(name="CodingDojo Silicon Valley", city="Mountain View", state="CA")
+Dojo.objects.create(name="CodingDojo Seatle", city="Seatle", state="WA")
+Dojo.objects.create(name="CodingDojo New York", city="New York", state="NY")
+
+Dojo.objects.first().delete()
+Dojo.objects.first().delete()
+Dojo.objects.first().delete()
+
+Dojo.objects.create(name="Dojo1", city="City1", state="S1")
+Dojo.objects.create(name="Dojo2", city="City2", state="S2")
+Dojo.objects.create(name="Dojo3", city="City3", state="S3")
+
+Ninja.objects.create(first_name="Ninja1", last_name="Ninja1", dojo=Dojo.objects.get(id=4))
+Ninja.objects.create(first_name="Ninja2", last_name="Ninja2", dojo=Dojo.objects.get(id=4))
+Ninja.objects.create(first_name="Ninja3", last_name="Ninja3", dojo=Dojo.objects.get(id=4))
+
+Ninja.objects.create(first_name="Ninja4", last_name="Ninja4", dojo=Dojo.objects.get(id=5))
+Ninja.objects.create(first_name="Ninja5", last_name="Ninja5", dojo=Dojo.objects.get(id=5))
+Ninja.objects.create(first_name="Ninja6", last_name="Ninja6", dojo=Dojo.objects.get(id=5))
+
+Ninja.objects.create(first_name="Ninja7", last_name="Ninja7", dojo=Dojo.objects.get(id=6))
+Ninja.objects.create(first_name="Ninja8", last_name="Ninja8", dojo=Dojo.objects.get(id=6))
+Ninja.objects.create(first_name="Ninja9", last_name="Ninja9", dojo=Dojo.objects.get(id=6))
+
+Dojo.objects.get(id=4).ninjas.all()
+
+Dojo.objects.get(id=5).ninjas.all()
+
+desc = models.TextField()
+python manage.py makemigrations
+set all existing value as "Non description"
+python manage.py migrate
+check record by Dojo.objects.first().desc
+

@@ -1,0 +1,56 @@
+Book.objects.create(name="C sharp", desc="book about C sharp")
+Book.objects.create(name="Python", desc="book about Python")
+Book.objects.create(name="Java", desc="book about Java")
+Book.objects.create(name="PHP", desc="book about PHP")
+Book.objects.create(name="Ruby", desc="book about Ruby")
+
+
+Author.objects.create(first_name="Mike", last_name="Nguyen")
+Author.objects.create(first_name="Speros", last_name="Tran")
+Author.objects.create(first_name="John", last_name="Smith")
+Author.objects.create(first_name="Jadee", last_name="Minh")
+Author.objects.create(first_name="Jay", last_name="Chou")
+
+
+notes = models.TextField()
+python manage.py makemigrations
+add to existing value notes = "note for author"
+python manage.py migrate
+
+b = Book.objects.get(id=5)
+b.name = "C#"
+b.save()
+
+b = Author.objects.get(id=5)
+b.first_name = "Ketul"
+b.save()
+
+b = Author.objects.first()
+b.books = {1,2}
+b.save()
+
+b = Author.objects.get(id=2)
+b.books = {1,2,3}
+b.save()
+
+b = Author.objects.get(id=3)
+b.books = {1,2,3,4}
+b.save()
+
+b = Author.objects.get(id=4)
+b.books = {1,2,3,4,5}
+b.save()
+
+Book.objects.get(id=3).authors.all()
+
+b = Book.objects.get(id=3).authors
+b.remove(2)
+
+b = Book.objects.get(id=2)
+b.add(5)
+b.save()
+
+Author.objects.get(id=3).books.all()
+
+Author.objects.get(id=2).books.all()
+
