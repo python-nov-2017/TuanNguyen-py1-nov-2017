@@ -35,12 +35,9 @@
                     <td>{{ user.created_at }}</td>
                     <td>{{ user.update_at }}</td>
                     <td>
-                        <form action="users/edit" method="POST">
-                            {% csrf_token %}
-                            <a href="users/{{ user.id }}">Show</a> &emsp;
-                            <a href="users/{{ user.id }}/edit">Edit</a>  &emsp;
-                            <a href="users/{{ user.id }}/destroy">Delete</a>                                                      
-                        </form>
+                        <a href="users/{{ user.id }}">Show</a> &emsp;
+                        <a href="users/{{ user.id }}/edit">Edit</a>  &emsp;
+                        <a href="users/{{ user.id }}/destroy">Delete</a> 
                     </td>
                     </tr>
                 {% endfor %}
