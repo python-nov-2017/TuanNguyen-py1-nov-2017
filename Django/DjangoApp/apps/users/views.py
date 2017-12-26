@@ -1,21 +1,41 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.shortcuts import render, HttpResponse, redirect
 
+from models import *
 # Create your views here.
 
 def index(request):
-    response = "Placeholder to later display all the list of users"
-    return HttpResponse(response)
+    return render(request, "users/index.html", {"users": User.objects.all()})
 
 def new(request):
-    return redirect('/register')
+    return render(request, "users/register.html")
 
-def register(request):
-    response = "Placeholder for users to create a new user record"
-    return HttpResponse(response)
+def create(request):    
+    if request.method == "POST":
+        User.objects.create(first_name=request.POST["first_name"], last_name=request.POST["last_name"], email=request.POST["email"])
+        print User.objects.first()
+    return redirect('/users')
 
-def login(request):
-    response = "Placeholder for users to login"
-    return HttpResponse(response)
+def edit(request, user_id):
+    return render(request, "users/edit.html", {"user": User.objects.get(id=user_id)})
+
+def update(request):
+    if request.method =="POST":
+        u = User.objects.get(id=request.POST["id"])
+        u.first_name = request.POST["first_name"]
+        u.last_name = request.POST["last_name"]
+        u.email = request.POST["email"]
+        u.save()
+    return render(request, "users/show.html", { "user": User.objects.get(id=request.POST["id"]) })
+
+
+
+def show(request, user_id):
+    return render(request, "users/show.html", { "user": User.objects.get(id=user_id) })
+
+def destroy(request, user_id):
+    u = User.objects.get(id=user_id)
+    u.delete()
+    return redirect('/users')
+

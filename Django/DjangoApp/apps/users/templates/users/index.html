@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>User</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>        
+</head>
+<body>
+    <div class="container">
+        <head class="header clearfix">
+            <h2>Users</h2>
+        </head>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">id</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Updated At</th>                 
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>                
+                {% for user in users %}
+                    <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.created_at }}</td>
+                    <td>{{ user.update_at }}</td>
+                    <td>
+                        <form action="users/edit" method="POST">
+                            {% csrf_token %}
+                            <a href="users/{{ user.id }}">Show</a> &emsp;
+                            <a href="users/{{ user.id }}/edit">Edit</a>  &emsp;
+                            <a href="users/{{ user.id }}/destroy">Delete</a>                                                      
+                        </form>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="users/new">
+            <input class="btn btn-primary btn-sm" type="submit" value="Add a user">
+        </a>
+    </div>    
+</body>
+</html>
