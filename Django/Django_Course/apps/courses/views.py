@@ -8,8 +8,6 @@ from models import *
 # Create your views here.
 
 def index(request):
-    c = Course.objects.first()
-    print c.name
     return render(request, "courses/index.html", { "courses": Course.objects.all()} )
 
 def create(request):

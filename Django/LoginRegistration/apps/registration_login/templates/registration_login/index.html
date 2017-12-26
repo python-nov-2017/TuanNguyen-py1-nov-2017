@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>Login and Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>        
+</head>
+<body>
+    <div class="container">
+        <head class="header clearfix">
+            <h2>Registration</h2>
+        </head>
+        <br>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="create" method="POST">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2 col-form-label-sm" for="name">First name:</label>
+                <input type="text" class="form-control form-control-sm col-md-3" name="first_name">
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2 col-form-label-sm" for="name">Last name:</label>
+                <input type="text" class="form-control form-control-sm col-md-3" name="last_name">
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2 col-form-label-sm" for="name">Email:</label>
+                <input type="email" class="form-control form-control-sm col-md-3" name="email">
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2 col-form-label-sm" for="name">Password:</label>
+                <input type="password" class="form-control form-control-sm col-md-3" name="pw">
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2 col-form-label-sm" for="name">Password Confirmation:</label>
+                <input type="password" class="form-control form-control-sm col-md-3" name="pw_confirm">
+            </div>                                              
+            <button type="submit" class="btn btn-primary">Register</button>               
+        </form>
+        <br>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+            <head class="header clearfix">
+                <h2>Login</h2>
+            </head>
+            <br>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="login" method="POST">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2 col-form-label-sm" for="name">Email:</label>
+                    <input type="email" class="form-control form-control-sm col-md-3" name="email">
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2 col-form-label-sm" for="name">Password:</label>
+                    <input type="password" class="form-control form-control-sm col-md-3" name="pw">
+                </div>                                            
+                <button type="submit" class="btn btn-primary">Login</button>               
+            </form>
+            <br>
+        </div>    
+    <div class="container">
+            <head class="header clearfix">
+                <h2>Users</h2>
+            </head>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>                    
+                    <th scope="col">Created At</th>
+                    <th scope="col">Updated At</th> 
+                    </tr>
+                </thead>
+                <tbody>                
+                    {% for user in users %}
+                        <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.password }}</td>
+                        <td>{{ user.created_at }}</td>
+                        <td>{{ user.update_at }}</td>                        
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>               
+</body>
+</html>
