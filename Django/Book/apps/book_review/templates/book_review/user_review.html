@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>Books Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills float-right">                  
+                    <li class="nav-item">
+                        <a class="nav-link" href="books/add">Add Book and Review</a>
+                    </li>    
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">Logout</a>
+                    </li>                
+                </ul>
+            </nav>     
+            <h3 class="text-muted">Welcome, {{ request.session.alias }}</h3>            
+        </header>
+        <hr class="my-4">        
+    </div> 
+    
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="col-sm-5">
+                <h5>Recent Book Reviews:</h5>
+                <br>
+                {% for review in reviews %}
+                    <div class="container">
+                       <a href="books/{{review.book.id}}"><h6> {{review.book.title}} </h6></a>
+                       &emsp; Rating: {{review.rating}} <br>
+                      <div class="d-inline">&emsp; <a href="users/{{review.user.id}}">{{review.user.alias}}</a></div> says: <div class="d-inline font-italic">{{review.review}} </div>
+                      <div><small class="font-italic">  &emsp; Posted on {{review.created_at}}</small></div>
+                    </div>
+                    <br>
+                {% endfor %}
+                <br>
+            </div> 
+            <div class="col-sm-5">
+                <h5>Other Books with Reviews</h5>
+                <div class="container">
+                    {% for book in books %}       
+                        <a href="books/{{book.id}}">{{book.title}}</a> <br>
+                    {% endfor %}
+                </div>                  
+            </div>              
+        </div>      
+    </div>
+    
+    
+</body>
+</html>

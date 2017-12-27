@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>Books Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills float-right">                  
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>    
+                    <li class="nav-item">
+                        <a class="nav-link" href="../logout">Logout</a>
+                    </li>                
+                </ul>
+            </nav>     
+            <h3 class="text-muted">Welcome, {{ request.session.alias }}</h3>            
+        </header>
+        <hr class="my-4">        
+    </div>     
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="col-sm-5">
+                <h5>{{ book.title }}</h5>
+                <h6>{{ book.author}}</h6>
+                <br>
+                {% for review in reviews %}
+                    <div class="container">
+                        <h6> Rating: {{review.rating}}</h6>
+                        <div class="d-inline">&emsp; <a href="../users/{{review.user.id}}">{{review.user.alias}}</a></div> says: <div class="d-inline font-italic">{{review.review}} </div>
+                        <div><small class="font-italic">  &emsp; Posted on {{review.created_at}}</small></div>
+                    </div>
+                    <br>
+                {% endfor %}
+                <br>
+            </div> 
+            <div class="col-sm-5">
+                    <h5>Add a Review: </h5>
+                    <form action="add_review_process/{{book.id}}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label class="col-form-label col-sm-4 col-form-label-sm">Review:</label>
+                            <textarea class="form-control form-control-sm col-md-10" name="review" row=10></textarea>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-sm-4 col-form-label-sm">Rating:</label>
+                            <select class="form-control form-control-sm col-md-2" name="rating">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>                                                                                                
+                            </select>
+                        </div>                                              
+                        <button type="submit" class="btn btn-primary">Add Review</button>               
+                    </form>
+                    <br>                  
+            </div>              
+        </div>      
+    </div>    
+</body>
+</html>
