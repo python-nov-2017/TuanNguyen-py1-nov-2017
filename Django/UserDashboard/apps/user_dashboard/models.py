@@ -47,9 +47,11 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
+    desc = models.TextField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    user_level = models.CharField(max_length=255)
     objects = UserManager()
     def __repr__(self):
-        return "<User Object: {} {}, level = {}>".format(self.first_name, self.last_name, self.user_level)
+        return "<User Object: {} {}, user_level = {}>".format(self.first_name, self.last_name, self.user_level)
     

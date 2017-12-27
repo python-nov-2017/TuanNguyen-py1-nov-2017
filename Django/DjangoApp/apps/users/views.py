@@ -37,5 +37,5 @@ def show(request, user_id):
 def destroy(request, user_id):
     u = User.objects.get(id=user_id)
     u.delete()
-    return redirect('/users')
+    return redirect('/dashboard')
 

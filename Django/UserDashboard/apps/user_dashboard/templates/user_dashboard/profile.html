@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>Edit Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills float-right">                  
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="../dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="edit">Profile</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="../logout">Log off</a>
+                    </li>                
+                </ul>
+            </nav>
+            <h3 class="text-muted">Test App  <small>{{ request.session.first_name }}</small></h3>
+        </header>
+        <hr class="my-4">        
+    </div>  
+    <div class="container">
+        <head class="header clearfix">
+            <h2>Edit Profile</h2>                   
+        </head>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}          
+        <div class="row justify-content-around">
+            <div class="col-sm-5 border border-dark">
+                <h5>Edit Information</h5>
+                <form action="edit" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3 col-form-label-sm">First name:</label>
+                        <input type="text" class="form-control form-control-sm col-md-7" name="first_name" value="{{user.first_name}}">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3 col-form-label-sm">Last name:</label>
+                        <input type="text" class="form-control form-control-sm col-md-7" name="last_name" value="{{user.last_name}}">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-3 col-form-label-sm">Email:</label>
+                        <input type="email" class="form-control form-control-sm col-md-7" name="email" value="{{user.email}}">
+                    </div>                                             
+                    <button type="submit" class="btn btn-primary">Save</button>               
+                </form>
+                <br>                
+            </div>
+            <div class="col-sm-5 border border-dark">
+                <h5>Change Password</h5>
+                <form action="edit" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm">Password:</label>
+                        <input type="password" class="form-control form-control-sm col-md-7" name="pw">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm">Password Confirmation:</label>
+                        <input type="password" class="form-control form-control-sm col-md-7" name="pw_confirm">
+                    </div>                                              
+                    <button type="submit" class="btn btn-primary">Update Password</button>               
+                </form>                       
+            </div>              
+        </div>       
+        <br>  
+        <div class="row justify-content-center ">
+            <div class="col-10 border border-dark">
+                <h5>Edit Description</h5>
+                <form action="edit" method="POST">
+                    {% csrf_token %}
+                    <textarea class="form-control" name="desc" rows="3"> {{ user.desc }} </textarea>                                          
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>           
+                <br>
+            </div>
+        </div             
+    </div>    
+</body>
+</html>
