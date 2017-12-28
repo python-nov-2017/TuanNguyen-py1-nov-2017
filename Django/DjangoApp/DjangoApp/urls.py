@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^users', include('apps.users.urls')),
     url(r'^', include('apps.users.urls')),    
     url(r'^user_login/', include('apps.user_login.urls')),
-    url(r'^card/', include('apps.card.urls'),)
+    url(r'^card/', include('apps.card.urls')),
+    url(r'^note/', include('apps.note.urls')),
 ]

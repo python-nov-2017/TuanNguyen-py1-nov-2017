@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax Note</title>
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>       
+</head>
+<body>
+    <div class="container col-3 justify-content-center">
+        <h1>Note</h1>
+        <hr>
+
+        <div class="col-10" id="placeholder">
+            {% for note in notes %}
+            <div class="row justify-content-between">
+                <h3>{{note.title}}</h3>
+                <form action="/note/delete" method="POST" id="note_{{note.id}}_delete_ajax_form">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{note.id}}">
+                    <input class="btn btn-primary" type="submit" value="Delete">
+                </form>
+                <script>
+                    $('#note_{{note.id}}_delete_ajax_form').submit(function(e){                
+                        e.preventDefault()
+                        $.ajax({
+                            url: $(this).attr('action'),
+                            method: 'post',
+                            data: $(this).serialize(),
+                            success: function(serverResponse) {
+                                $('#placeholder').html(serverResponse)
+                            }
+                        })
+                    });        
+                </script>
+            </div>
+            <form action="/note/add_content" method="POST" id="note_{{note.id}}_add_content_ajax_form">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{note.id}}">    
+                <textarea class="col-12" id= "ajax_note_{{note.id}}" name="content" rows="5" placeholder="Enter description here...">{{note.content}}</textarea> <br>   
+            </form>
+            <script>
+                $('#ajax_note_{{note.id}}').on('focusout', function(){
+                    $.ajax({
+                        url: $(this).parent().attr('action'),
+                        method: 'post',
+                        data: $(this).parent().serialize(),
+                        success: function(serverResponse) {
+                            $('#placeholder').html(serverResponse)
+                        }
+                    })
+                });
+            </script>
+            <hr>
+            {% endfor %}
+        </div> 
+
+        <div class="col-6">
+        <form action="/note/add" method="POST" class="ajax_form" id="add_note_ajax_form" >
+            {% csrf_token %}
+            <input type="text" class="form-control" name="title" placeholder="Insert note title here...">
+            <input class="btn btn-primary mt-2" type="submit" value="Add Note">
+        </form> 
+        <script>
+            $('#add_note_ajax_form').submit(function(e){
+                e.preventDefault()
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'post',
+                    data: $(this).serialize(),
+                    success: function(serverResponse) {
+                        $('#placeholder').html(serverResponse)                                                
+                    }
+                })                
+            })
+        </script>
+    </div>       
+    </div>    
+    
+</body>
+</html>

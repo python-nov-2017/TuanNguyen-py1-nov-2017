@@ -1,0 +1,41 @@
+{% for note in notes %}
+<div class="row justify-content-between">
+    <h3>{{note.title}}</h3>
+    <form action="/note/delete" method="POST" id="note_{{note.id}}_delete_ajax_form">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{note.id}}">
+        <input class="btn btn-primary" type="submit" value="Delete">
+    </form>
+    <script>
+        $('#note_{{note.id}}_delete_ajax_form').submit(function(e){                
+            e.preventDefault()
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'post',
+                data: $(this).serialize(),
+                success: function(serverResponse) {
+                    $('#placeholder').html(serverResponse)
+                }
+            })
+        });        
+    </script>
+</div>
+<form action="/note/add_content" method="POST" id="note_{{note.id}}_add_content_ajax_form">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{note.id}}">    
+    <textarea class="col-12" id= "ajax_note_{{note.id}}" name="content" rows="5" placeholder="Enter description here...">{{note.content}}</textarea> <br>   
+</form>
+<script>
+    $('#ajax_note_{{note.id}}').on('focusout', function(){
+        $.ajax({
+            url: $(this).parent().attr('action'),
+            method: 'post',
+            data: $(this).parent().serialize(),
+            success: function(serverResponse) {
+                $('#placeholder').html(serverResponse)
+            }
+        })
+    });
+</script>
+<hr>
+{% endfor %}
