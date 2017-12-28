@@ -18,10 +18,12 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^', include('apps.blogs.urls')),
-    url(r'blogs', include('apps.blogs.urls')),    
+    url(r'^blogs', include('apps.blogs.urls')),    
     url(r'^time', include('apps.timedisplay.urls')),
     url(r'^random_word', include('apps.randomword.urls')),
     url(r'^surveys', include('apps.surveys.urls')),
     url(r'^users', include('apps.users.urls')),
     url(r'^', include('apps.users.urls')),    
+    url(r'^user_login/', include('apps.user_login.urls')),
+    url(r'^card/', include('apps.card.urls'),)
 ]

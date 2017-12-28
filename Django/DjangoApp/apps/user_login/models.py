@@ -13,4 +13,4 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     update_at = models.DateTimeField(auto_now = True)
     def __repr__(self):
-        return "<Blog object: name: {} {} ".format(self.first_name, self.last_name)
+        return "<User object: name: {} {} ".format(self.first_name, self.last_name)

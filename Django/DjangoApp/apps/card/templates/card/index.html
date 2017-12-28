@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax Posts</title>
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>       
+</head>
+<body>
+    <div class="container">
+        <h1>My Posts</h1>
+        <form action="/card/add" method="post" id="add_card_ajax_form">
+            {% csrf_token %}
+            Add a note: <br>            
+            <textarea name="content" id="" cols="30" rows="5"></textarea> <br>
+            <input type="submit" value="Submit">
+        </form>
+        <div class="container" id="placeholder">Placeholder for Ajax content</div> 
+
+        <script>
+            $('#add_card_ajax_form').submit(function(e){
+                e.preventDefault()
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'post',
+                    data: $(this).serialize(),
+                    success: function(serverRespone) {
+                        console.log('success', serverRespone)
+                        $('#placeholder').html(serverRespone)
+                    }
+                })
+            })
+        </script>
+      
+    </div>    
+</body>
+</html>
