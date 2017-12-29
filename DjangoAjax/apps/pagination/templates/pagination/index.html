@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax Pagination</title>
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>       
+</head>
+<body>
+    <div class="container">
+        <h1>Ajax Pagination</h1>
+        <hr>
+        <div class="row mt-4">
+            <div class="col">              
+                Name: <input type="text" class="search_field" id="filter_name" name="name" value="">     
+            </div>
+            <div class="col">              
+                From: <input type="date"  class="search_field"id="filter_from" name="from_date" value="">
+            </div>           
+            <div class="col">              
+                To: <input type="date" class="search_field" id="filter_to" name="to_date" value="">         
+            </div>            
+        </div>
+        <div class="col-11 mt-3 p-2" id="results"></div>  
+        <script>
+            $().ready(function(){
+                get_leads();
+            })
+            $('#filter_name').keyup(function(){
+                get_leads();
+            });
+            $('#filter_from').change(function(){
+                get_leads();
+            });
+            $('#filter_to').change(function(){
+                get_leads();
+            });
+            $('#results').on('click','.page-link', function(e){
+                e.preventDefault()
+                page_num = $(this).attr('href')
+                get_leads(page_num)
+            });
+
+
+            function get_leads(page_num=1){
+                var csrf_token = "{{ csrf_token }}";
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+                            xhr.setRequestHeader("X-CSRFToken", csrf_token)
+                        }
+                    }               
+                 });            
+                $.ajax({
+                    url: '/pagination/get_leads/',
+                    method: 'post',
+                    data: getFilterData(page_num),
+                    success: function(serverResponse){
+                        console.log(serverResponse)
+                        $('#results').html(serverResponse)
+                    }
+                })
+            }
+
+            function getFilterData(page_num) {
+                var filters = $('.search_field')    
+
+                return {
+                    name: $('#filter_name').val(),
+                    from_date: $('#filter_from').val(),
+                    to_date: $('#filter_to').val(),
+                    page: page_num,
+                }
+            }      
+        </script>
+    </div> 
+
+    <div class="container mt-5">
+        <h3>Add a new item</h3>
+        <form action="/pagination/add_lead" method="POST" id="add_lead_ajax_form">
+            {% csrf_token %}
+            <div class='row form-group'>
+                <div class="col">
+                    First Name: {{form.first_name}}
+                </div>
+                <div class="col">
+                    Last Name: {{form.last_name}}
+                </div>
+                <div class="col">
+                    Email: {{form.email}}
+                </div>    
+            </div>
+            <button class="btn btn-primary mt-2" type="submit">Create Lead</button>  
+        </form>     
+        <script>
+            $('#add_lead_ajax_form').submit(function(e){
+                e.preventDefault()
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'post',
+                    data: $(this).serialize(),
+                    success: function(serverResponse) {
+                        console.log('success', serverResponse)
+                        $('#results').html(serverResponse)
+                    }
+
+                })
+            })
+
+        </script>
+    </div>
+</body>
+</html>
