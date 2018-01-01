@@ -20,5 +20,6 @@ urlpatterns = [
     # url(r'^', admin.site.urls),
     url(r'^card/', include('apps.card.urls')),
     url(r'^note/', include('apps.note.urls')),    
-    url(r'^pagination/', include('apps.pagination.urls')),    
+    url(r'^pagination/', include('apps.pagination.urls')),   
+    url(r'^music/', include('apps.music.urls')),    
 ]

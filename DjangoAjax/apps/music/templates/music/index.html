@@ -1,0 +1,39 @@
+<h1>Enter Artist's Name:</h1>
+<form action="/music/get_movie" method="post">
+    {% csrf_token %}
+    <label for="user_input">Enter Artists's Name:</label>
+    <input id="user_input" name="user_input" type="search">
+    <input type="submit" value="search">
+</form>
+<div id="results"></div>
+<script>
+// Code has been formatted somewhat differently, to clearly illustrate the nesting inherent in jQuery.
+// In Industry, code won't look this way -- it will be more compact -- but for now this should be more helpful.
+$(document).ready(
+    function( ) {
+        $('form').submit(
+            function( ) {
+                var url = "https://itunes.apple.com/search?term=";
+                url += $('#user_input').val( );
+                url += "&entity=musicVideo";
+                $.get(
+                    url, 
+                    function(res) {
+                        if (res.results.length !== 0) {
+                            html_string = "<video controls src='" + res.results[0].previewUrl + "'></video>";
+                            console.log(html_string);
+                        }
+                        else {
+                            html_string = "Not Found";
+                        }
+                        $('#results').html(html_string);
+                    },
+                    'json'
+                );
+                return false;
+            }
+        );
+    }
+);
+Copy
+</script>
